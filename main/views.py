@@ -10,7 +10,7 @@ def show_main(request):
         'desc_t2': 'A depiction of unrequited love. Others say it means to attain the impossible. Perhaps both can coexist.',
         'flower_t3': 'Sunflower',
         'amount_t3': '2',
-        'desc_t3': 'Full of warmth and happiness. Such happiness is to be envied.',
+        'desc_t3': 'Full of warmth and happiness. Such happiness might be the goal of many.',
         
     }
 

@@ -11,11 +11,11 @@ html, body {
 
 .header{
     width:100%; 
-    background-color: #f579b1;
+    background-color: #ed8fb9;
     text-align: center;
     color: white;
     padding: 10px;
-    border-bottom: 12px solid #54bdaa;
+    border-bottom: 12px solid #5ebcab;
 }
 
 .information{
@@ -57,14 +57,14 @@ table, th, td {
 
 th {
     color: white;
-    border:1px solid #54bdaa;
-    background-color: #54bdaa;
+    border:1px solid #5ebcab;
+    background-color: #5ebcab;
     border-style: outset;
     font-size: 16px;
   }
 
 td {
-    border:px solid #54bdaa;
+    border:px solid #5ebcab;
     border-style: inset;
     font-size: 12px;
 }
