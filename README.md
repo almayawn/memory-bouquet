@@ -5,6 +5,7 @@ Kelas: PBP E
 # Memory Bouquet
 
 [memory-bouquet.adaptable.app/main/](https://memory-bouquet.adaptable.app/main/)
+######  (tampilan sebelum terkena ban. Terdapat tampilan baru yang memuat nama, kelas yang tidak sempat ter-*deploy*)
 ---
 
 # Tugas 2 Checklist
