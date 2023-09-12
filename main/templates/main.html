@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Memory Bouquet</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Memory Bouquet</h1>
+        <h2>a collection of flowers from humanity</h2>
+    </div>
+    <!--Code adapted from w3schools HTML Table Borders -->
+    <div class="container">
+        <table class="table-container">
+            <tr>
+                <th>Flower</th>
+                <th>Amount</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>{{ flower_t1 }}</td>
+                <td>{{ amount_t1 }}</td>
+                <td>{{ desc_t1 }}</td>
+            </tr>
+            <tr>
+                <td>{{ flower_t2 }}</td>
+                <td>{{ amount_t2 }}</td>
+                <td>{{ desc_t2 }}</td>
+            </tr>
+            <tr>
+                <td>{{ flower_t3 }}</td>
+                <td>{{ amount_t3 }}</td>
+                <td>{{desc_t3 }}</td>
+            </tr>
+    </div>
+    </table>
+    </body>
+</html>

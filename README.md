@@ -1,11 +1,9 @@
-Nama: Alma Laras Bestari
+Nama: Alma Laras Bestari  
+NPM: 2206082303  
+Kelas: PBP E  
 
-NPM: 2206082303
-
-Kelas: PBP E
-
-> # Memory Bouquet
-> ## A collection of flowers from humans that fate took a glance on.
+# Memory Bouquet
+A collection of flowers from humanity.
 
 ---
 
