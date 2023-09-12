@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="header">
-        <h1>Memory Bouquet</h1>
+        <p class="information">{{ name }} | {{ npm}} | {{ class }}</p>
+        <h1>{{ application }}</h1>
         <h2>a collection of flowers from humanity</h2>
     </div>
     <!--Code adapted from w3schools HTML Table Borders -->
@@ -20,19 +21,19 @@
                 <th>Description</th>
             </tr>
             <tr>
-                <td>{{ flower_t1 }}</td>
-                <td>{{ amount_t1 }}</td>
-                <td>{{ desc_t1 }}</td>
+                <td>Red Spider Lily</td>
+                <td>4</td>
+                <td>Known as the flower of farewell, it symbolize abandonment, loss, death, and separation.</td>
             </tr>
             <tr>
-                <td>{{ flower_t2 }}</td>
-                <td>{{ amount_t2 }}</td>
-                <td>{{ desc_t2 }}</td>
+                <td>Blue Rose</td>
+                <td>1</td>
+                <td>A depiction of unrequited love. Others say it means to attain the impossible. Perhaps both can coexist.</td>
             </tr>
             <tr>
-                <td>{{ flower_t3 }}</td>
-                <td>{{ amount_t3 }}</td>
-                <td>{{desc_t3 }}</td>
+                <td>Sunflower</td>
+                <td>2</td>
+                <td>Full of warmth and happiness. Such happiness might be the goal of many.</td>
             </tr>
     </div>
     </table>

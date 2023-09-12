@@ -11,11 +11,11 @@ html, body {
 
 .header{
     width:100%; 
-    background-color: #ed8fb9;
+    background-color: #e285af;
     text-align: center;
     color: white;
     padding: 10px;
-    border-bottom: 12px solid #5ebcab;
+    border-bottom: 12px solid #73beb0;
 }
 
 .information{
