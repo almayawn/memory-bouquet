@@ -160,6 +160,6 @@ Checklist digunakan juga untuk menjawab pertanyaan pertama.
             self.assertEqual(field_label, 'amount')
     ```
 
-    Field tests tersebut akan mengetest apakah value dari field label dan apakah character size sesuai.
+    ```setUpTestData()``` membuat object Flower yang akan digunakan pada testcase. Field tests tersebut akan mengetest apakah value dari field label dan apakah character size sesuai.
 
 
