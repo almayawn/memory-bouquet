@@ -135,3 +135,31 @@ Checklist digunakan juga untuk menjawab pertanyaan pertama.
 
         [Referensi MVC MVT](https://www.geeksforgeeks.org/difference-between-mvc-and-mvt-design-patterns/)
 
+    # BONUS
+    [Referensi Django Testing Tutorial](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Testing)
+
+    [Dokumentasi Django](https://docs.djangoproject.com/en/4.2/topics/testing/overview/)
+
+    Melalui referensi yang diatas, saya menambahkan implementasi test model seperti ini di ```tests.py```
+
+    ```
+    class FlowerModelTest(TestCase):
+        @classmethod
+        def setUpTestData(cls):
+            # Set up non-modified objects used by all test methods
+            Flower.objects.create(name='Lily', amount='4')
+
+        def test_name_label(self):
+            flower = Flower.objects.get(id=1)
+            field_label = flower._meta.get_field('name').verbose_name
+            self.assertEqual(field_label, 'name')
+
+        def test_amount_label(self):
+            flower = Flower.objects.get(id=1)
+            field_label = flower._meta.get_field('amount').verbose_name
+            self.assertEqual(field_label, 'amount')
+    ```
+
+    Field tests tersebut akan mengetest apakah value dari field label dan apakah character size sesuai.
+
+
