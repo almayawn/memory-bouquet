@@ -367,3 +367,32 @@ Checklist digunakan juga untuk menjawab pertanyaan terakhir.
 
 
 - [x] Melakukan add-commit-push ke GitHub.
+
+    ## BONUS
+    Saya mengimplementasi bonus dengan menambahkan kode berikut pada ```views.py```
+    ```python
+    def show_main(request):
+    ...
+    total_entries = len(flowers)
+    if (total_entries > 1):
+        entry_messages = f'You have a total of {total_entries} entries'
+    else:
+        entry_messages = f'You have a total of {total_entries} entry'
+    ...
+    ```
+    dan pada dictionary ```context``` saya juga menambahkan potongan kode berikut
+    ```python
+        context = {
+        ...
+        'total_entry_message': entry_messages,
+        ...
+    }
+    ```
+
+    Agar tampilannya dapat terlihat, pada ```main.html``` saya menambahkan kode berikut
+    ```html
+    ...
+    <p class="total-entry">{{ total_entry_message}}</p>
+    ...
+    ```
+
