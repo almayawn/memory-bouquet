@@ -484,6 +484,13 @@ Checklist digunakan juga untuk menjawab pertanyaan terakhir.
 
     ![Dummy Data](https://media.discordapp.net/attachments/1006390336299483188/1156393171530551397/Screen_Shot_2023-09-27_at_01.35.39.png?ex=6514ce90&is=65137d10&hm=4bcd1ed0ceb14bb925dbeb4678f82485c421e721921304ea3045b205963ab72e&=&width=1550&height=968)
 
+
+    Jika semua sudah diimplementasikan seperti ini:
+
+    (data berbeda karena mencoba fitur delete)
+    ![alma implementasi](https://cdn.discordapp.com/attachments/1006390336299483188/1156436627963523132/Screen_Shot_2023-09-27_at_10.43.48.png?ex=6514f709&is=6513a589&hm=ee4ec8ef5fedd5a90a29116d48fd430d862139ce394f47643f1bf938b76e3200&)
+    ![mayaa Implementasi](https://media.discordapp.net/attachments/1006390336299483188/1156436628336812092/Screen_Shot_2023-09-27_at_10.45.52.png?ex=6514f709&is=6513a589&hm=43dfcceb5728355c5ba7d7c93f71c48ac8d7553fa5f1653161ef421faf4659ba&=&width=1550&height=968)
+
 - [x] Menghubungkan model Item dengan User.
 
     Agar data model antaruser tidak tercampur, kita akan menghubungkan model Flower dengan User. Pada ```models.py``` kita tambahkam ```from django.contrib.auth.models import User```
@@ -651,7 +658,7 @@ Checklist digunakan juga untuk menjawab pertanyaan terakhir.
         return redirect('main:show_main')
     ```
 
-    Kemudian saya melakukan routing URL. Pada ```urls.py```saya import fungsi-fungsi yang sebelumnya sudah saya buat dan menambahkan path url pada ```urlpatterns```
+    Kemudian saya melakukan routing URL. Pada ```urls.py``` saya import fungsi-fungsi yang sebelumnya sudah saya buat dan menambahkan path url pada ```urlpatterns```
 
     ```python
     from main.views import increment_flower_amount, decrement_flower_amount, delete_flower
