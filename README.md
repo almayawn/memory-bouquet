@@ -486,7 +486,7 @@ Checklist digunakan juga untuk menjawab pertanyaan terakhir.
 
 - [x] Menghubungkan model Item dengan User.
 
-    Agar data model antaruser tidak tercampur, kita akan menghbungkan model Flower dengan User. Pada ```models.py``` kita tambahkam ```from django.contrib.auth.models import User```
+    Agar data model antaruser tidak tercampur, kita akan menghubungkan model Flower dengan User. Pada ```models.py``` kita tambahkam ```from django.contrib.auth.models import User```
 
     Setelah itu saya tambahkan kode ini sehingga User dapat terhubung dengan Model Flower
     ```python
@@ -495,7 +495,7 @@ Checklist digunakan juga untuk menjawab pertanyaan terakhir.
         ...
     ```
 
-    Pada fungsi ```create_entry``` di ```views.py``` saya mengubah fungsinya sedikit
+    Pada fungsi ```create_entry``` di ```views.py```, saya mengubah fungsinya sedikit untuk menandakan bahwa objek tersebut dimiliki oleh user yang sedang login.
 
     ```python
     def create_entry(request):
@@ -512,7 +512,7 @@ Checklist digunakan juga untuk menjawab pertanyaan terakhir.
 
     Setelah itu saya menjalankan ```python manage.py makemigrations``` dan ```python manage.py migrate```
 
-- [ ]Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+- [x] Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
 
     Agar detail informasi pengguna seperti nama user muncul pada tampilan layar dan menampilkan hanya Flower miliknya saja, saya mengubah sebagian fungsi ```show_main``` menjadi seperti ini
 
