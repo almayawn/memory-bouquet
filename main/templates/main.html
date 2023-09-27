@@ -4,119 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Memory Bouquet</title>
 </head>
-    <style>
-        html, body {
-        margin: 0;
-        padding: 0;
-    }  
-
-    .container {
-        margin-left: 20px; 
-        margin-right: 20px;
-    }
-
-    .header{
-        width:100%; 
-        background-color: #e285af;
-        text-align: center;
-        color: white;
-        padding: 10px;
-        border-bottom: 12px solid #73beb0;
-    }
-
-    .total-entry{
-        font-size: 12px;
-        text-align: center;
-    }
-
-    .information{
-        margin: 0px;
-        font-size: 10px
-    }
-
-    .button{
-        background-color: #e285af; /* Green */
-        border: none;
-        font-family: Verdana, sans-serif;
-        color: white;
-        padding: 8px 16px;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 12px;
-        text-align: left
-    }
-
-    .table-container {
-        margin: 10px auto 20px auto;
-        text-align: center;
-    }
-    
-    .messages{
-        text-align: center;
-        display: inline-block;
-        width: 20%;
-        padding: 10px;
-        margin: 0 auto;
-        font-family: Verdana, sans-serif;
-        background-color: #b5e1d9;
-        font-size: 12px;
-        display: block;
-        list-style-type: none;
-    }
-
-    h1{
-        margin: 10px;
-        font-family: Georgia, serif;
-        font-size: 50px;
-    }
-
-    h2{
-        margin: 10px;
-        font-family: Georgia, serif;
-        font-size: 14px;
-        letter-spacing: 3px;
-    }
-
-    p, table, th, td {
-        font-family: Verdana, sans-serif;
-    }
-
-    table {
-        text-align: center;
-        width: 100%;
-    }
-
-    table, th, td {
-        margin: 10;
-        padding: 10;
-        border-collapse: collapse;
-    }
-
-    th {
-        color: white;
-        border:1px solid #73beb0;
-        background-color: #73beb0;
-        border-style: outset;
-        font-size: 16px;
-    }
-
-    td {
-        border:px solid #73beb0;
-        border-style: inset;
-        font-size: 12px;
-    }
+<style>
 </style>
 <body>
     <div class="header">
-        <p class="information">{{ name }} | {{ npm }} | {{ class }}</p>
+        <p class="information">{{ owner_name }} | {{ npm }} | {{ class }}</p>
         <h1>{{ application }}</h1>
         <h2>a collection of flowers from humanity</h2>
     </div>
     <!--Code adapted from w3schools HTML Table Borders -->
     <div class="container">
-        <br />
+        <div class ="greetings">
+            <h1>Welcome {{ name }} 𓇢𓆸</h1>
+            <span>Sesi terakhir login: {{ last_login }}</span>
+        </div>
+
+        <p class="total-entry">{{ total_entry_message}}</p>
 
         <!--Code adapted from StackOverflow: django display message after POST form submit-->
         {% if messages %}
@@ -127,31 +31,60 @@
         </span>
         {% endif %}
 
-        <p class="total-entry">{{ total_entry_message}}</p>
-
         <a href="{% url 'main:create_entry' %}">
-            <button class="button">
+            <button>
                 Add New Entry
             </button>
         </a>
 
-        <table class="table-container">
-            <tr>
-                <th style="width:25%">Name</th>
-                <th style="width:15%">Amount</th>
-                <th style="width:45%">Description</th>
-                <th style="width:15%">Date Added</th>
-            </tr>
-        
-            {% for flower in flowers %}
+        <a href="{% url 'main:logout' %}">
+            <button>
+                Logout
+            </button>
+        </a>
+
+        <div class="flower-table"">
+            <table class="table-container">
                 <tr>
-                    <td>{{ flower.name }}</td>
-                    <td>{{ flower.amount }}</td>
-                    <td>{{ flower.description }}</td>
-                    <td>{{ flower.date_added }}</td>
+                    <th style="width:20%">Name</th>
+                    <th style="width:15%">Amount</th>
+                    <th style="width:45%">Description</th>
+                    <th style="width:15%">Date Added</th>
+                    <th style="width:5%;">Delete</th>
                 </tr>
-            {% endfor %}
-        </table>
+            
+                {% for flower in flowers %}
+                    <tr>
+                        <td>{{ flower.name }}</td>
+                        <td>
+                            <form action="{% url 'main:dec_flower' flower.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="inc-dec-button" type="submit">
+                                    -
+                                </button>
+                            </form>
+                            {{ flower.amount }}
+                            <form action="{% url 'main:inc_flower' flower.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="inc-dec-button" type="submit">
+                                    +
+                                </button>
+                            </form>
+                        </td>
+                        <td>{{ flower.description }}</td>
+                        <td>{{ flower.date_added }}</td>
+                        <td>
+                            <form action="{% url 'main:del_flower' flower.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="del-button" type="submit">
+                                    <span>Delete</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
     </body>
 </html>
