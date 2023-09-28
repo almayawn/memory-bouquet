@@ -702,12 +702,3 @@ Checklist digunakan juga untuk menjawab pertanyaan terakhir.
                     </form>
                 </td>
     ```
-
-
-
-
-
-
-
-
-
