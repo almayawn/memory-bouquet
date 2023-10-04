@@ -11,6 +11,7 @@ For easy access
 -  [Tugas 2](#tugas-2)
 -  [Tugas 3](#tugas-3)
 -  [Tugas 4](#tugas-4)
+-  [Tugas 5](#tugas-5)
 
 # Tugas 2
 Checklist digunakan juga untuk menjawab pertanyaan pertama.
@@ -702,12 +703,272 @@ Checklist digunakan juga untuk menjawab pertanyaan terakhir.
                     </form>
                 </td>
     ```
+---
+# Tugas 5
 
+-  [X] Kustomisasi desain pada templat HTML yang telah dibuat pada Tugas 4 dengan menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma) dengan ketentuan sebagai berikut
 
+    - [X] Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin.
+    - [X] Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card.
+- [X] Menjawab beberapa pertanyaan berikut pada README.md pada root folder (silakan modifikasi README.md yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
 
+    - [X] Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
 
+        1. Element Selector
+        Element selector dapat mengubah properti untuk semua elemen dengan tag HTML yang sama. Ini berguna saat Anda ingin menerapkan membuat seragam pada semua elemen dengan tag yang sama. Element selector digunakan untuk mengatur properti dasar yang diterapkan pada semua elemen dengan tag yang sama.
+        2. ID Selector
+        ID selector digunakan untuk memilih elemen dengan ID unik dalam halaman web. Ini berguna ketika Anda ingin menerapkan modifikasi pada elemen tertentu yang memiliki ID unik. ID selector digunakan ketika perlu merujuk pada elemen tertentu dengan ID yang unik. ID bersifat unik di dalam halaman.
+        3. Class selector dapat mengelompokkan elemen dengan karakteristik yang sama, seperti memberi mereka gaya seragam. Class selector adalah salah satu yang paling umum digunakan dalam CSS. Anda dapat menggunakannya untuk mengelompokkan elemen yang memiliki karakteristik yang sama, seperti tombol, menu, atau elemen lain yang harus tampil seragam. Ini juga sangat berguna untuk memisahkan struktur HTML dari styling. Class selector menggunakan format .[class_name]. Class selector digunakan untuk memilih semua elemen yang termasuk dalam atribut kelas tertentu.
 
+    - [X] Jelaskan HTML5 Tag yang kamu ketahui.
 
+        Berikut beberapa HTML5 Tag aku saya ketahui 
+        1. ```<div>``` untuk membantu mengelompokkkan data pada suatu web page.
+        2. ```<p>``` untuk merepresentasikan sebuah paragraf.
+        3. ```<h1>``` sampai ```<h6>``` untuk merepresentasikan heading beserta prioritynya.
+        4. ```<header>``` untuk merepresentasikan bagian header.
+        5. ```<figure>``` untuk merepresentasikan bagian seld-contained flow content.
+        6. ```<table>``` untuk menampilkan table.
+        7. ```meter``` untuk merepresentasikan suatu besaran ukuran.
+        8. ```<section>``` untuk merepresentasikan bagain generic.
+        9. ```<footer>``` untuk merepresentasikan bagian footer.
+        10. ```<keygen>``` untuk merepresentasikan kontrol keygen
+        11. ```<nav>``` untuk menyatakan bagian navigasi.
+        12. ```<progress>``` untuk menampilkan progress.
+        13. ```<time> ``` untuk menampilkan waktu.
+        14. ```<audio>``` untuk menyatakan audio file.
+        15. ```<canvas>``` untuk merender dynamic bitmap seperti games atau graph.
 
+    - [X] Jelaskan perbedaan antara margin dan padding.
 
+        Margin mengatur jarak elemen tersebut antar elemen lain. Sedangkan padding mengatur jarak didalam elemen.
 
+    - [X] Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+
+        Bootstrap dan Tailwind memiliki beberapa perbedaan walaupun keduanya merupkan framework CSS. Bootstrap lebih mudah untuk dipakai karena Bootstrap menyediakan komponen yang sudah jadi. Jika ingin melakukan banyak customisasi, dengan Tailwind akan lebih mudah. Bootstrap dapat digunakan jika kita ingin hasil yang cepat dan konsisten.
+
+    - [X] Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+        Saya menambahkan styling ini pada ```base.html```
+
+        ``` css
+                container {
+            margin-left: 20px; 
+            margin-right: 20px;
+        }
+
+        .header{
+            width:100%; 
+            background-color: #e285af;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-bottom: 12px solid #73beb0;
+        }
+
+        .total-entry{
+            font-size: 12px;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .information{
+            margin: 0px;
+            font-size: 10px
+        }
+
+        .table-container {
+            margin: 10px auto 20px auto;
+            text-align: center;
+        }
+
+        .messages{
+            text-align: center;
+            display: inline-block;
+            width: 20%;
+            padding: 10px;
+            margin: 0 auto;
+            font-family: Verdana, sans-serif;
+            background-color: #b5e1d9;
+            font-size: 12px;
+            display: block;
+            list-style-type: none;
+            border-radius: 4px;
+        }
+
+        .flower-input, .login, .register{
+            margin: auto;
+            padding: 10px;
+            text-align: left;
+            border-style: none;
+        }
+
+        .register {
+            width: 45%;
+        }
+
+        .flower-input {
+            width: 50%;
+        }
+
+        .login {
+            width: 20%;;
+        }
+
+        .flower-input h1, .login h1, .register h1{
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .flower-input label {
+            font-size: 14px;
+        }
+
+        .login td, .login label, .register label{
+            font-size: 12px;
+        }
+
+        .register label, .register th {
+            vertical-align: top;
+            text-align: left;
+        }
+
+        .login p, .register span {
+            font-size: 12px;
+        }
+
+        .login p {
+            text-align: center;
+        }
+
+        input[type=submit]{
+            background-color: #73beb0; 
+            border: none;
+            font-family: Verdana, sans-serif;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            text-align: left
+        }
+
+        input[type=submit]:hover {
+            background-color: #3a5b7b;
+        }
+
+        .greetings {
+            text-align: center;
+        }
+
+        .greetings h1{
+            font-size: 24px;
+            margin: 16px 10px 0px 10px;
+        }
+
+        .greetings span{
+            font-size: 10px;
+            font-family: Verdana, sans-serif;
+            margin: 0px 10px 10px 10px;
+        }
+
+        .flower-table{
+            text-align: center;
+            width: 100%;
+        }
+
+        .flower-table table, .flower-table th, .flower-table td{
+            margin: 10;
+            padding: 10;
+            border-collapse: collapse;
+        }
+
+        .flower-table th{
+            color: white;
+            border:1px solid #73beb0;
+            background-color: #73beb0;
+            border-style: outset;
+            font-size: 16px;
+        }
+
+        .flower-table td{
+            border:px solid #73beb0;
+            border-style: inset;
+            font-size: 12px;
+        }
+
+        .flower-table form {
+            display: inline-block;
+            margin: 0px 15px;
+        }
+
+        .inc-dec-button {
+            padding: 2px 8px;
+            width: 100%;
+            max-width: 100%
+        }
+
+        .inc-dec-button:hover {
+            background-color: #3a5b7b;
+        }
+
+        .del-button {
+            background-color: #ffffff;
+            color:#e43a6a;
+            padding: 4px 8px;
+            margin: 8px;
+        }
+
+        .del-button:hover {
+            color: #6b0d20;
+        }
+
+        h1{
+            margin: 10px;
+            font-family: Georgia, serif;
+            font-size: 50px;
+        }
+
+        h2{
+            margin: 10px;
+            font-family: Georgia, serif;
+            font-size: 14px;
+            letter-spacing: 3px;
+        }
+
+        p, table, th, td, li {
+            font-family: Verdana, sans-serif;
+        }
+
+        button {
+            background-color: #e285af; /* Green */
+            border: none;
+            font-family: Verdana, sans-serif;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            text-align: left
+        }
+
+        a {
+            display: inline-block
+        }
+        
+        ```
+
+- [X] Melakukan add-commit-push ke GitHub.
+
+    ## BONUS 
+
+    Menambahkan potongan kode ini sehingga jika berada pada iterasi terakhir warna berubah.
+
+    ```html
+    {% for flower in flowers %}
+        <tr
+        {% if forloop.last %}
+        style='background-color:#d4eedd;'
+        {% endif %}
+        >
+    ```
