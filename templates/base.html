@@ -4,223 +4,221 @@
     <head>
         <title>Memory Bouquet</title>
     </head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-        />
         {% block meta %}
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1">
         {% endblock meta %}
     <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-    }  
+        html, body {
+    margin: 0;
+    padding: 0;
+}  
 
-    .container {
-        margin-left: 20px; 
-        margin-right: 20px;
-    }
+.container {
+    margin-left: 20px; 
+    margin-right: 20px;
+}
 
-    .header{
-        width:100%; 
-        background-color: #e285af;
-        text-align: center;
-        color: white;
-        padding: 10px;
-        border-bottom: 12px solid #73beb0;
-    }
+.header{
+    width:100%; 
+    background-color: #e285af;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    border-bottom: 12px solid #73beb0;
+}
 
-    .total-entry{
-        font-size: 12px;
-        text-align: center;
-        margin: 20px;
-    }
+.total-entry{
+    font-size: 12px;
+    text-align: center;
+    margin: 20px;
+}
 
-    .information{
-        margin: 0px;
-        font-size: 10px
-    }
+.information{
+    margin: 0px;
+    font-size: 10px
+}
 
-    .table-container {
-        margin: 10px auto 20px auto;
-        text-align: center;
-    }
+.table-container {
+    margin: 10px auto 20px auto;
+    text-align: center;
+}
+
+.messages{
+    text-align: center;
+    display: inline-block;
+    width: 20%;
+    padding: 10px;
+    margin: 0 auto;
+    font-family: Verdana, sans-serif;
+    background-color: #b5e1d9;
+    font-size: 12px;
+    display: block;
+    list-style-type: none;
+    border-radius: 4px;
+}
+
+.flower-input, .login, .register{
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+    border-style: none;
+}
+
+.register {
+    width: 45%;
+}
+
+.flower-input {
+    width: 50%;
+}
+
+.login {
+    width: 20%;;
+}
+
+.flower-input h1, .login h1, .register h1{
+    font-size: 32px;
+    text-align: center;
+}
+
+.flower-input label {
+    font-size: 14px;
+}
+
+.login td, .login label, .register label{
+    font-size: 12px;
+}
+
+.register label, .register th {
+    vertical-align: top;
+    text-align: left;
+}
+
+.login p, .register span {
+    font-size: 12px;
+}
+
+.login p {
+    text-align: center;
+}
+
+input[type=submit]{
+    background-color: #73beb0; 
+    border: none;
+    font-family: Verdana, sans-serif;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    text-align: left
+}
+
+input[type=submit]:hover {
+    background-color: #3a5b7b;
+}
+
+.greetings {
+    text-align: center;
+}
+
+.greetings h1{
+    font-size: 24px;
+    margin: 16px 10px 0px 10px;
+}
+
+.greetings span{
+    font-size: 10px;
+    font-family: Verdana, sans-serif;
+    margin: 0px 10px 10px 10px;
+}
+
+.flower-table{
+    text-align: center;
+    width: 100%;
+}
+
+.flower-table table, .flower-table th, .flower-table td{
+    margin: 10;
+    padding: 10;
+    border-collapse: collapse;
+}
+
+.flower-table th{
+    color: white;
+    border:1px solid #73beb0;
+    background-color: #73beb0;
+    border-style: outset;
+    font-size: 16px;
+}
+
+.flower-table td{
+    border:px solid #73beb0;
+    border-style: inset;
+    font-size: 12px;
+}
+
+.flower-table form {
+    display: inline-block;
+    margin: 0px 15px;
+}
+
+.inc-dec-button {
+    padding: 2px 8px;
+    width: 100%;
+    max-width: 100%
+}
+
+.inc-dec-button:hover {
+    background-color: #3a5b7b;
+}
+
+.del-button {
+    background-color: #ffffff;
+    color:#e43a6a;
+    padding: 4px 8px;
+    margin: 8px;
+}
+
+.del-button:hover {
+    color: #6b0d20;
+}
+
+h1{
+    margin: 10px;
+    font-family: Georgia, serif;
+    font-size: 50px;
+}
+
+h2{
+    margin: 10px;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+
+p, table, th, td, li {
+    font-family: Verdana, sans-serif;
+}
+
+button {
+    background-color: #e285af; /* Green */
+    border: none;
+    font-family: Verdana, sans-serif;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    text-align: left
+}
+
+a {
+    display: inline-block
+}
+
     
-    .messages{
-        text-align: center;
-        display: inline-block;
-        width: 20%;
-        padding: 10px;
-        margin: 0 auto;
-        font-family: Verdana, sans-serif;
-        background-color: #b5e1d9;
-        font-size: 12px;
-        display: block;
-        list-style-type: none;
-        border-radius: 4px;
-    }
-
-    .flower-input, .login, .register{
-        margin: auto;
-        padding: 10px;
-        text-align: left;
-        border-style: none;
-    }
-
-    .register {
-        width: 45%;
-    }
-
-    .flower-input {
-        width: 50%;
-    }
-
-    .login {
-        width: 20%;;
-    }
-
-    .flower-input h1, .login h1, .register h1{
-        font-size: 32px;
-        text-align: center;
-    }
-
-    .flower-input label {
-        font-size: 14px;
-    }
-
-    .login td, .login label, .register label{
-        font-size: 12px;
-    }
-
-    .register label, .register th {
-        vertical-align: top;
-        text-align: left;
-    }
-
-    .login p, .register span {
-        font-size: 12px;
-    }
-
-    .login p {
-        text-align: center;
-    }
-
-    input[type=submit]{
-        background-color: #73beb0; 
-        border: none;
-        font-family: Verdana, sans-serif;
-        color: white;
-        padding: 8px 16px;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 12px;
-        text-align: left
-    }
-
-    input[type=submit]:hover {
-        background-color: #3a5b7b;
-    }
-
-    .greetings {
-        text-align: center;
-    }
-
-    .greetings h1{
-        font-size: 24px;
-        margin: 16px 10px 0px 10px;
-    }
-
-    .greetings span{
-        font-size: 10px;
-        font-family: Verdana, sans-serif;
-        margin: 0px 10px 10px 10px;
-    }
-
-    .flower-table{
-        text-align: center;
-        width: 100%;
-    }
-
-    .flower-table table, .flower-table th, .flower-table td{
-        margin: 10;
-        padding: 10;
-        border-collapse: collapse;
-    }
-
-    .flower-table th{
-        color: white;
-        border:1px solid #73beb0;
-        background-color: #73beb0;
-        border-style: outset;
-        font-size: 16px;
-    }
-
-    .flower-table td{
-        border:px solid #73beb0;
-        border-style: inset;
-        font-size: 12px;
-    }
-
-    .flower-table form {
-        display: inline-block;
-        margin: 0px 15px;
-    }
-
-    .inc-dec-button {
-        padding: 2px 8px;
-        width: 100%;
-        max-width: 100%
-    }
-
-    .inc-dec-button:hover {
-        background-color: #3a5b7b;
-    }
-
-    .del-button {
-        background-color: #ffffff;
-        color:#e43a6a;
-        padding: 4px 8px;
-        margin: 8px;
-    }
-
-    .del-button:hover {
-        color: #6b0d20;
-    }
-
-    h1{
-        margin: 10px;
-        font-family: Georgia, serif;
-        font-size: 50px;
-    }
-
-    h2{
-        margin: 10px;
-        font-family: Georgia, serif;
-        font-size: 14px;
-        letter-spacing: 3px;
-    }
-
-    p, table, th, td, li {
-        font-family: Verdana, sans-serif;
-    }
-
-    button {
-        background-color: #e285af; /* Green */
-        border: none;
-        font-family: Verdana, sans-serif;
-        color: white;
-        padding: 8px 16px;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 12px;
-        text-align: left
-    }
-
-    a {
-        display: inline-block
-    }
-
     </style>
 
     <body>

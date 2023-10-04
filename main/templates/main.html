@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <!DOCTYPE html>
 <html>
-<head>
-</head>
+    <head>
+    </head>
 <style>
 </style>
 <body>
@@ -54,19 +53,29 @@
                 </tr>
             
                 {% for flower in flowers %}
-                    <tr>
-                        <td>{{ flower.name }}</td>
+                    <tr
+                    {% if forloop.last %}
+                    style='background-color:#d4eedd;'
+                    {% endif %}
+                    >
+                        <td >{{ flower.name }}</td>
                         <td>
                             <form action="{% url 'main:dec_flower' flower.id %}" method="POST">
                                 {% csrf_token %}
-                                <button class="inc-dec-button" type="submit">
+                                <button class="inc-dec-button" type="submit"
+                                {% if forloop.last %}
+                                style='background-color:#42a694';
+                                {% endif %}>
                                     -
                                 </button>
                             </form>
                             {{ flower.amount }}
                             <form action="{% url 'main:inc_flower' flower.id %}" method="POST">
                                 {% csrf_token %}
-                                <button class="inc-dec-button" type="submit">
+                                <button class="inc-dec-button" type="submit"
+                                {% if forloop.last %}
+                                style='background-color:#42a694';
+                                {% endif %}>
                                     +
                                 </button>
                             </form>
@@ -76,7 +85,10 @@
                         <td>
                             <form action="{% url 'main:del_flower' flower.id %}" method="POST">
                                 {% csrf_token %}
-                                <button class="del-button" type="submit">
+                                <button class="del-button" type="submit"
+                                {% if forloop.last %}
+                                style='background-color:#d4eedd;'
+                                {% endif %}>
                                     <span>Delete</span>
                                 </button>
                             </form>
