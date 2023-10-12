@@ -12,6 +12,7 @@ For easy access
 -  [Tugas 3](#tugas-3)
 -  [Tugas 4](#tugas-4)
 -  [Tugas 5](#tugas-5)
+-  [Tugas 6](#tugas-6)
 
 # Tugas 2
 Checklist digunakan juga untuk menjawab pertanyaan pertama.
@@ -972,3 +973,223 @@ Checklist digunakan juga untuk menjawab pertanyaan terakhir.
         {% endif %}
         >
     ```
+---
+# Tugas 6
+- Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+
+    **Synchronous Programming**
+
+    Pada ini, *task* (operasi) dieksekusi secara berurutan dan hanya satu *task* yang dapat dieksekusi. Task akan dieksekusi sesuai urutan ia muncul dalam code program kita. Ini berarti *task* lain harus menunggu *task* lainnya untuk selesai dieksekusi terlebih dahulu.
+
+    **Asynchronous Programming**
+    Kebalikannya dengan synchronous programming, pada asynchronous programming, *task* dieksekusi secara bersamaan sehingga *task*yang satu tidak harus menunggu *task* yang lain selesai sebelum menjalankan *task*-nya.
+
+- Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+
+    Event-driven programming sering digunakan pada penerapan JavaScript dan AJAX. Paradigma event-driven programming adalah sebuah paradigma dimana alur jalannya program didasarkan pada konsep "events" dari user. Events ini dapat berupa tindakan pengguna seperti mengklik tombol, mengisi formulir, ataupun scrolling. Ketika suatu acara terjadi, program akan merespons dan menjalankan fungsi tertentu yang telah ditetapkan sebelumnya. Paradigma ini memungkinkan pembangunan antarmuka pengguna (UI) yang interaktif dan responsif.
+
+    Salah satu contoh penerapannya pada tugas ini adalah ketika user mengeklik tombol "Add Entry" pada modal untuk menambahkan entry bunga. Ketika tombol "Add Entry" diklik, JavaScript menggunakan event listener untuk mendeteksi event yang terjadi (button click). Ketika event tersebut terjadi, JavaScript akan menjalankan fungsi addFlower().
+
+    ```javascript
+    document.getElementById("button-add").onclick = addFlower;
+    ```
+
+- Jelaskan penerapan asynchronous programming pada AJAX.
+
+    AJAX merupakan singkatan dari Asynchronous Javascript and XML. AJAX bukan sebuah *programming language* melainkan sebuah teknologi untuk pengembangan web yang memungkinkan aplikasi web untuk bekerja secara asynchronous.
+
+    Dalam konteks AJAX, asynchronous programming memungkinkan permintaan data ke server web dan pemrosesan respons server tidak harus menunggu pemrosesan yang sedang berlangsung untuk selesai, sehingga halaman web tetap responsif. Beberapa penerapan asynchronous programming pada AJAX meliputi pertukaran data, yang memungkinkan pengiriman dan penerimaan data dari server tanpa harus me-*reload* keseluruhan halaman. AJAX memungkinkan Asynchronous Calls ke server web sehingga klien tidak perlu menunggu semua data.
+
+    Contohnya pada tugas ini kita menggunakan fetch, async dan await untuk mengelola kode asynchronous.
+
+- Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+
+    Dalam penggunaan AJAX, terdapat dua teknologi utama yang digunakan, yaitu Fetch API dan library jQuery.
+
+    Fetch API adalah bagian bawaan dari JavaScript modern dan tidak memerlukan unduhan tambahan. Sedangkan jQuery butuh. Oleh karena hal tersebut, penggunaan fetch API akan lebih efisien dalam hal ukuran dan waktu memuat halaman karena tidak memerlukan perpustakaan eksternal. Selain itu, Fetch API menggunakan promise untuk pengelolaan tugas asinkron, yang membuat kode lebih mudah dibaca dan dikelola.
+
+    Sedangkan jQuery memiliki ukurannya yang besar dan tidak semua fitur pastinya akan digunakan. Penggunaan jQuery juga dapat memperlambat waktu muat halaman. Namun, jQuery lebih cocok untuk browser lama. Selain itu, tersedia banyak plugin jQuery, termasuk yang berhubungan dengan dengan AJAX sehingga dapat memperluas fungsionalitasnya.
+
+    *Overall*, menurut saya dalam masa modern ini, Fetch API lebih baik digunakan dibanding jQuery. Fetch API lebih baik dalam pengembangan web modern karena lebih modern, ringan, dan lebih efisien. Tetapi hal ini jika kita tidak butuh mendukung browser lama dalam aplikasi yang kita buat.
+
+- Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+    - AJAX GET
+        Pertama, pada ```main.py``` saya menambahkan ini. Setelah itu saya mengatur pengaturan url di ```urls.py```
+
+        ```python
+        def get_flower_json(request):
+            flowers = Flower.objects.filter(user=request.user)
+            return HttpResponse(serializers.serialize('json', flowers))
+        ```
+
+        Lalu saya menambahkan ```script``` pada bagian bawah ```main.html```. Untuk mengambil data, kita menambahkan kode ini
+
+        ```javascript
+        async function getFlowers() {
+            return fetch("{% url 'main:get_flower_json' %}").then((res) => res.json())
+        }
+        ```
+
+        Untuk melakukan rendering main dari data yang diambil menggunakan AJAX, saya menambahkan kode berikut pada bagian ```script``` pada ```main.html```.
+
+        ```javascript
+        async function getFlowers() {
+            return fetch("{% url 'main:get_flower_json' %}").then((res) => res.json())
+        }
+
+        async function refreshFlowers() {
+        document.getElementById("flower-card").innerHTML = "";
+        const flowers = await getFlowers();
+
+        const decUrl = "{% url 'main:dec_flower' 0 %}";
+        const incUrl = "{% url 'main:inc_flower' 0 %}";
+        const delUrl = "{% url 'main:del_flower' 0 %}";
+            
+        flowers.forEach((flower, index, arr) => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+
+            const cardContent = `
+                <h5>${flower.fields.name}</h5>
+                <p style="font-size: 10px; margin: 0px 20px 10px 0px;">
+                    ${flower.fields.date_added}</p>
+                <p>Amount: ${flower.fields.amount}</p>
+                <p>${flower.fields.description}</p>
+
+                <form action="${incUrl.replace('0', flower.pk)}" method="POST">
+                    {% csrf_token %}
+                    <button class="inc-dec-button" type="submit">+</button>
+                </form>
+                <form action="${decUrl.replace('0', flower.pk)}" method="POST">
+                    {% csrf_token %}
+                    <button class="inc-dec-button" type="submit">-</button>
+                </form>
+                <form action="${delUrl.replace('0', flower.pk)}" method="POST">
+                    {% csrf_token %}
+                    <button class="del-button" type="submit">
+                        <span>Delete</span>
+                    </button>
+                </form>
+            `;
+
+            card.innerHTML = cardContent;
+
+            if (index === flowers.length - 1) {
+                card.classList.add("last-card"); // Add a CSS class for the last card
+            }
+
+            document.getElementById("flower-card").appendChild(card);
+        });
+        }
+        ```
+
+        Setelah itu panggil function ```refreshFlowers()``` sehingga dapat dilihat.
+
+    - AJAX POST
+
+        Saya menulis kode berikut pada ```main.html``` untuk membuat modal dan membuat button Add Entry untuk memunculkan modal.
+
+        ```html
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title">Add New Entry</h1>
+                </div>
+                <div class="modal-body">
+                    <form id="form" method="POST">
+                        {% csrf_token %}
+                        <table class="table">
+                            <tr>
+                                <td><label for="name">Name:</label></td>
+                                <td><input type="text" id="name" name="name"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="amount">Amount:</label></td>
+                                <td><input type="number" id="amount" name="amount"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="description">Description:</label></td>
+                                <td><textarea id="description" name="description"></textarea></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="close-button" class="btn-secondary">Close</button>
+                    <button id="button-add" class="btn-primary">Add Entry</button>
+                </div>
+            </div>
+        </div>
+        <button id="open-modal" class="btn-primary">Add Entry</button>
+        ```
+
+        Selanjutnya saya menambahkan kode berikut pada ```views.py``` dan melakukan import ```from django.views.decorators.csrf import csrf_exempt```
+
+        ```python
+        @csrf_exempt
+        def add_flower_ajax(request):
+            if request.method == 'POST':
+                name = request.POST.get("name")
+                amount = request.POST.get("amount")
+                description = request.POST.get("description")
+                user = request.user
+
+                new_product = Flower(name=name, amount=amount, description=description, user=user)
+                new_product.save()
+
+                return HttpResponse(b"CREATED", status=201)
+
+            return HttpResponseNotFound()
+        ```
+
+        Setelah itu saya menambahkan kode berikut, karena saya tidak menggunakan bootstrap saya mereferensi w3schools dan tutorial untuk membuat modalnya
+
+        ```javascript
+        // taken from W3Schools because I am not using bootstrap ^^
+        const modal = document.getElementById("modal");
+        const btn = document.getElementById("open-modal");
+        const span = document.getElementById("close-button");
+
+        btn.addEventListener("click", function() {
+            modal.style.display = "block";
+        });
+
+        span.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+
+        function addFlower(event) {
+            fetch("{% url 'main:add_flower_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            })
+            .then(response => {
+                if (response.ok) {
+                    modal.style.display = "none";
+                    document.getElementById("form").reset();
+                    refreshFlowers();
+                }
+            });
+
+            return false
+        }
+
+        document.getElementById("button-add").onclick = addFlower;
+        ```
+
+        Setelah itu jalankan collectstatic dan lakukan git add commit push dan melakukan deployment.
+
+
+
+
+
+
