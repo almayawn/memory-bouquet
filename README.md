@@ -4,7 +4,7 @@ Kelas: PBP E
 
 # Memory Bouquet
 
-Should've been successfully deployed here [alma-laras-tugas.pbp.cs.ui.ac.id/](http://dimas-herjunodarpito-tugas.pbp.cs.ui.ac.id/)
+Should've been successfully deployed here [alma-laras-tugas.pbp.cs.ui.ac.id/](http://alma-laras-tugas.pbp.cs.ui.ac.id/)
 ---
 # Directory
 For easy access
