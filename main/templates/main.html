@@ -21,83 +21,142 @@
 
         <p class="total-entry">{{ total_entry_message}}</p>
 
-        <!--Code adapted from StackOverflow: django display message after POST form submit-->
-        {% if messages %}
-        <span class="messages">
-            {% for message in messages %}
-            <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-            {% endfor %}
-        </span>
-        {% endif %}
-
-        <a href="{% url 'main:create_entry' %}">
-            <button>
-                Add New Entry
-            </button>
-        </a>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title">Add New Entry</h1>
+                </div>
+                <div class="modal-body">
+                    <form id="form" method="POST">
+                        {% csrf_token %}
+                        <table class="table">
+                            <tr>
+                                <td><label for="name">Name:</label></td>
+                                <td><input type="text" id="name" name="name"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="amount">Amount:</label></td>
+                                <td><input type="number" id="amount" name="amount"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="description">Description:</label></td>
+                                <td><textarea id="description" name="description"></textarea></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="close-button" class="btn-secondary">Close</button>
+                    <button id="button-add" class="btn-primary">Add Entry</button>
+                </div>
+            </div>
+        </div>
+        <button id="open-modal" class="btn-primary">Add Entry</button>
+        
 
         <a href="{% url 'main:logout' %}">
             <button>
                 Logout
             </button>
         </a>
-
-        <div class="flower-table"">
-            <table class="table-container">
-                <tr>
-                    <th style="width:20%">Name</th>
-                    <th style="width:15%">Amount</th>
-                    <th style="width:45%">Description</th>
-                    <th style="width:15%">Date Added</th>
-                    <th style="width:5%;">Delete</th>
-                </tr>
-            
-                {% for flower in flowers %}
-                    <tr
-                    {% if forloop.last %}
-                    style='background-color:#d4eedd;'
-                    {% endif %}
-                    >
-                        <td >{{ flower.name }}</td>
-                        <td>
-                            <form action="{% url 'main:dec_flower' flower.id %}" method="POST">
-                                {% csrf_token %}
-                                <button class="inc-dec-button" type="submit"
-                                {% if forloop.last %}
-                                style='background-color:#42a694';
-                                {% endif %}>
-                                    -
-                                </button>
-                            </form>
-                            {{ flower.amount }}
-                            <form action="{% url 'main:inc_flower' flower.id %}" method="POST">
-                                {% csrf_token %}
-                                <button class="inc-dec-button" type="submit"
-                                {% if forloop.last %}
-                                style='background-color:#42a694';
-                                {% endif %}>
-                                    +
-                                </button>
-                            </form>
-                        </td>
-                        <td>{{ flower.description }}</td>
-                        <td>{{ flower.date_added }}</td>
-                        <td>
-                            <form action="{% url 'main:del_flower' flower.id %}" method="POST">
-                                {% csrf_token %}
-                                <button class="del-button" type="submit"
-                                {% if forloop.last %}
-                                style='background-color:#d4eedd;'
-                                {% endif %}>
-                                    <span>Delete</span>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
+        
+        <div id="flower-card" class="card-container" data-dec-url="{% url 'main:dec_flower' 0 %}" data-inc-url="{% url 'main:inc_flower' 0 %}" data-del-url="{% url 'main:del_flower' 0 %}">
         </div>
     </div>
     </body>
 </html>
+
+<script>
+    async function getFlowers() {
+        return fetch("{% url 'main:get_flower_json' %}").then((res) => res.json())
+    }
+
+    async function refreshFlowers() {
+    document.getElementById("flower-card").innerHTML = "";
+    const flowers = await getFlowers();
+
+    const decUrl = "{% url 'main:dec_flower' 0 %}";
+    const incUrl = "{% url 'main:inc_flower' 0 %}";
+    const delUrl = "{% url 'main:del_flower' 0 %}";
+        
+    flowers.forEach((flower, index, arr) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+
+        const cardContent = `
+            <h5>${flower.fields.name}</h5>
+            <p style="font-size: 10px; margin: 0px 20px 10px 0px;">
+                ${flower.fields.date_added}</p>
+            <p>Amount: ${flower.fields.amount}</p>
+            <p>${flower.fields.description}</p>
+
+            <form action="${incUrl.replace('0', flower.pk)}" method="POST">
+                {% csrf_token %}
+                <button class="inc-dec-button" type="submit">+</button>
+            </form>
+            <form action="${decUrl.replace('0', flower.pk)}" method="POST">
+                {% csrf_token %}
+                <button class="inc-dec-button" type="submit">-</button>
+            </form>
+            <form action="${delUrl.replace('0', flower.pk)}" method="POST">
+                {% csrf_token %}
+                <button class="del-button" type="submit">
+                    <span>Delete</span>
+                </button>
+            </form>
+        `;
+
+        card.innerHTML = cardContent;
+
+        if (index === flowers.length - 1) {
+            card.classList.add("last-card"); // Add a CSS class for the last card
+        }
+
+        document.getElementById("flower-card").appendChild(card);
+    });
+    }
+
+    refreshFlowers()
+
+    // taken from W3Schools because I am not using bootstrap ^^
+    const modal = document.getElementById("modal");
+    const btn = document.getElementById("open-modal");
+    const span = document.getElementById("close-button");
+
+    btn.addEventListener("click", function() {
+        modal.style.display = "block";
+    });
+
+    span.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+
+
+    function addFlower(event) {
+        fetch("{% url 'main:add_flower_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        })
+        .then(response => {
+            if (response.ok) {
+                modal.style.display = "none";
+                document.getElementById("form").reset();
+                refreshFlowers();
+            }
+        });
+
+        return false
+    }
+
+    document.getElementById("button-add").onclick = addFlower;
+
+
+</script>
 {% endblock content %}

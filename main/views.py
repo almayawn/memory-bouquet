@@ -5,7 +5,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.core import serializers
 from django.http import HttpResponseRedirect
 from main.forms import FlowerForm
@@ -13,6 +13,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from main.models import Flower
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 def register(request):
     form = UserCreationForm()
@@ -81,6 +82,25 @@ def show_main(request):
 
     return render(request, "main.html", context)
 
+def get_flower_json(request):
+    flowers = Flower.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', flowers))
+
+@csrf_exempt
+def add_flower_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_product = Flower(name=name, amount=amount, description=description, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+
 def create_entry(request):
     form = FlowerForm(request.POST or None)
 
@@ -88,8 +108,6 @@ def create_entry(request):
         entry = form.save(commit=False)
         entry.user = request.user
         entry.save()
-        name = form.cleaned_data['name']
-        messages.success(request, f'succesfully added a new entry "{name}"')
         return HttpResponseRedirect(reverse('main:show_main'))
 
     context = {
