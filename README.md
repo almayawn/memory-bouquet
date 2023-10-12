@@ -4,7 +4,7 @@ Kelas: PBP E
 
 # Memory Bouquet
 
-has been deployed here [here](https://memory-bouquet.adaptable.app/main/)
+Should've been successfully deployed here [alma-laras-tugas.pbp.cs.ui.ac.id/](http://alma-laras-tugas.pbp.cs.ui.ac.id/)
 ---
 # Directory
 For easy access
