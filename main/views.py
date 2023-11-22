@@ -1,17 +1,18 @@
 import datetime
+import json
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.core import serializers
 from django.http import HttpResponseRedirect
 from main.forms import FlowerForm
 from django.urls import reverse
 from django.shortcuts import render
-from main.models import Flower
+from main.models import Flower, Cake
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 
@@ -158,3 +159,22 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = Flower.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
+
+        new_product = Flower.objects.create(
+            user = request.user,
+            name = data["name"],
+            amount = int(data["amount"]),
+            description = data["description"]
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)

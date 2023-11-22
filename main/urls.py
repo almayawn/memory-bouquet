@@ -3,7 +3,7 @@ from main.views import show_main, create_entry, show_xml, show_json, show_xml_by
 from main.views import register, login_user, logout_user
 from main.views import increment_flower_amount, decrement_flower_amount, delete_flower
 from main.views import get_flower_json, add_flower_ajax
-
+from main.views import create_product_flutter
 app_name = 'main'
 
 urlpatterns = [
@@ -20,5 +20,6 @@ urlpatterns = [
     path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
     path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), 
     path('get-flower/', get_flower_json, name='get_flower_json'),
-    path('create-flower-ajax/', add_flower_ajax, name='add_flower_ajax')
+    path('create-flower-ajax/', add_flower_ajax, name='add_flower_ajax'),
+    path('create-flutter/', create_product_flutter, name='create_product_flutter'),
 ]
