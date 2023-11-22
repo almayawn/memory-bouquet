@@ -50,3 +50,30 @@ def logout(request):
         "message": "Logout Failed."
         }, status=401)
     
+@csrf_exempt
+def register(request):
+    if request.method == "POST":
+        input = json.loads(request.body)
+        # print(input)
+        username = input['username']
+        password = input['password']
+        password_confirmation = input['confirmPassword']
+
+        if password != password_confirmation:
+            return JsonResponse({
+                "status": "Failed",
+                "message": "Password does not match."
+            }, status=401)
+        
+        user = User.objects.create_user(username = username, password = password)
+        user.save()
+        
+        return JsonResponse({
+            "status": "Successful",
+            "message": "Regristration successful!"
+        }, status=200)
+
+    return JsonResponse({
+        "status": "Failed",
+        "message": "Regristration failed."
+    }, status=401)
