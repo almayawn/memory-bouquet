@@ -16,6 +16,7 @@ from main.models import Flower, Cake
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def register(request):
     form = UserCreationForm()
 
@@ -34,6 +35,7 @@ def register(request):
         }
     return render(request, 'register.html', context)
 
+@csrf_exempt
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -78,7 +80,7 @@ def show_main(request):
         'name': request.user.username,
         'flowers': flowers,
         'total_entry_message': entry_messages,
-        'last_login': request.COOKIES['last_login'],
+        'last_login': request.COOKIES.get('last_login'),
     }
 
     return render(request, "main.html", context)
